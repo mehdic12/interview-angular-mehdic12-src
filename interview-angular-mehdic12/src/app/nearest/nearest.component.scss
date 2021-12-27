@@ -1,0 +1,29 @@
+#Global #gauche {
+    float:left;
+    width:60%;
+}
+#Global #droite {
+    margin-left:60%   
+}
+
+.cadre {
+    background-color: #ffffff;    
+    margin: 0 auto 15px auto;
+    padding: 10px;
+    border: 2px solid #eeab69; 
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  
+}
+
+
+.content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 1660px;
+    flex-direction: column;
+    align-items: center;
+  }
+

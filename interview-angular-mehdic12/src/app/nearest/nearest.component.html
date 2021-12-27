@@ -1,0 +1,60 @@
+<br/>
+<br/>
+<br/>
+   <br/>
+ 
+ <div  class="content">    
+     
+   <!-- <div id="Global"> --> 
+     <div>  
+        <div id="gauche">  
+            <fieldset  id="id_fieldSet_form_search" class="cadre">  
+                <legend> Ville </legend>  
+                   
+                   <div>
+                        Nom : {{city.name}}  
+                  </div> 
+                 
+                   <div>
+                     Zip Code : {{city.zipCode}}  
+                   </div> 
+
+                   <div>
+                       Coordonnees : 
+                       <div>  x:{{city.coordinates.x}} </div>
+                       <div>  y:{{city.coordinates.y}} </div>
+                  </div> 
+
+            </fieldset>
+
+        </div>
+
+         <div id="droite">  
+            <fieldset  id="id_fieldSet_form_search" class="cadre">   
+                <legend> La plus proche</legend>  
+                <div>
+                    Nom : {{cityNearest.name}}  
+              </div> 
+             
+               <div>
+                 Zip Code : {{cityNearest.zipCode}}  
+               </div> 
+
+               <div>
+                   Coordonnees : 
+                   <div>  x:{{cityNearest.coordinates.x}} </div>
+                   <div>  y:{{cityNearest.coordinates.y}} </div>
+              </div> 
+
+
+                
+
+
+            </fieldset>
+
+        </div>
+     </div>
+
+</div>
+
+

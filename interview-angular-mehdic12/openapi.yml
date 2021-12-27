@@ -1,0 +1,145 @@
+openapi: 3.0.2
+info:
+  title: Cities API for angular app
+  version: 1.0.0
+  description: Manage cities
+paths:
+  /api/cities:
+    summary: Path used to manage the list of cities.
+    description: The REST endpoint/path used to list
+    get:
+      parameters:
+        - name: _limit
+          description: Size of the result, default is no limit
+          schema:
+            type: integer
+          in: query
+        - name: _start
+          description: Index of the first result, default is 0
+          schema:
+            type: integer
+          in: query
+          required: false
+        - name: _sort
+          description: sort by column name, default is no sort
+          schema:
+            enum:
+              - name
+              - zipCode
+            type: string
+          in: query
+          required: false
+        - name: _order
+          description: ASC or DESC, default is DESC
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+          in: query
+          required: false
+        - name: name_like
+          description: Wildcard Pattern to search by name case insensitive, default is `*`
+          schema:
+            type: string
+          in: query
+          required: false
+        - name: zipCode_like
+          description: Wildcard Pattern to search by zipCode case insensitive, default is `*`
+          schema:
+            type: string
+          in: query
+          required: false
+      responses:
+        '200':
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+                description: Cities total count
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+          description: Successful response - returns an array of `City` entities.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorResponse'
+          description: Invalid parameters
+      operationId: getCities
+      summary: List All cities
+      description: Gets a list of all `City` entities.
+  /api/cities/nearest:
+    summary: Path used to search nearest cities.
+    description: The REST endpoint/path used to search `City` entities.
+    get:
+      parameters:
+        - name: x
+          description: x coordinate point
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: y
+          description: y coordinate point
+          schema:
+            type: string
+          in: query
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+          description: Successful response - returns the nearest `City`.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorResponse'
+          description: Invalid parameters
+      operationId: nearestCity
+      summary: Search the nearest city
+      description: Search a `City` entity.
+components:
+  schemas:
+    Point:
+      title: Coordinate point
+      description: Point object
+      required: []
+      type: object
+      properties:
+        x:
+          description: x parameter
+          type: string
+        y:
+          description: y parameter
+          type: string
+    City:
+      title: Root Type for City
+      description: City object
+      required: []
+      type: object
+      properties:
+        name:
+          description: city name
+          type: string
+        zipCode:
+          format: int32
+          description: zip code
+          type: integer
+        coordinates:
+          description: coordinates
+          $ref: '#/components/schemas/Point'
+    BadRequestErrorResponse:
+      description: error response
+      type: object
+      properties:
+        description:
+          description: ''
+          type: string

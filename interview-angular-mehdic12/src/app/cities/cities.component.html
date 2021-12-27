@@ -1,0 +1,103 @@
+<div  *ngIf="showCities==true">
+ 
+ <div  class="content">    
+    <fieldset  id="id_fieldSet_form_search" class="cadre" >   
+      <legend> </legend>  
+      <br />
+      <form [formGroup]="searchForm" id="id_form_search" >         
+        <div class="form-group footer" >
+             <input formControlName="limit" data-msg-containerid='limitError' id="limit" name="limit"
+                type="text" required placeholder="_limit" (change)="changeLimit($event)">
+                 &nbsp;&nbsp; &nbsp;
+              <input formControlName="start" data-msg-containerid='startError' id="start" name="start"
+                type="text" required  placeholder="_start"  (change)="getDataFromIndex($event)">
+                
+            &nbsp;&nbsp; &nbsp;
+           <select formControlName="sort" class="form-control" (change)="changeSort($event)">
+                    <option disabled>Select Sort</option>
+                    <option>zipCode</option>
+                    <option>name</option>
+                  
+             </select>
+        </div>  
+        &nbsp;&nbsp; &nbsp;
+        <div class="form-group footer" >
+            <input formControlName="name_like" data-msg-containerid='name_likeError' id="name_like" name="name_like"
+               type="text" required placeholder="name_like" (change)="searchByName($event)"> 
+                &nbsp;&nbsp; &nbsp;
+             <input formControlName="zipCode_like" data-msg-containerid='zipCode_likeError' id="zipCode_like" name="name_like"
+               type="text" required  placeholder="zipCode_like" (change)="searchByZipCode($event)">
+               
+           &nbsp;&nbsp; &nbsp;
+          <select formControlName="order" class="form-control" (change)="changeOrder($event)">
+                   <option disabled>Select Order</option>
+                   <option>ASC</option>
+                   <option>DESC</option>
+                 
+            </select>
+       </div> 
+    <!-- 
+        <div class="form-group footer" style="padding:10px;">
+          <button ejs-button id="submitbutton" class="e-btn btn_add" type="submit" [disabled]="" >
+            <img src="assets/images/save.png" height="20" />
+            Enregistrer </button>&nbsp;&nbsp; &nbsp;
+          <button ejs-button id="submitbutton" class="e-btn btn_add" type="submit" > <img
+              src="assets/images/delete.png" height="20" />
+            Supprimer</button>&nbsp;&nbsp;
+          &nbsp;
+          <button ejs-button class="e-btn e-warning btn_add" type="reset"> <img src="assets/images/replace.png"
+              height="20" />initialiser </button>
+        </div> -->
+     </form>
+    </fieldset>
+  </div>
+
+ <fieldset  id="id_fieldSet_grid" class="cadre" style="height:20%;width: 50%;">  
+      <p> 
+        <ejs-grid #gridCities [dataSource]='cities' allowPaging='true' allowSorting='true' allowResizing='true'
+        [pageSettings]='pageSettings' [toolbar]='toolbar' (toolbarClick)='toolbarClickCities($event)'
+        [allowExcelExport]='true' (toolbarClick)='clickHandler($event)' [allowPdfExport]='true'
+        (dataBound)='dataBoundCities()' (load)='loadCities()' emptyText='ddddd'
+        (rowSelected)='onRowClickedCities($event)'>
+        <e-columns>
+            <e-column field='name' headerText='Name' textAlign='left' width='60'>   </e-column> 
+            <e-column field='zipCode' headerText='zip Code' textAlign='left' width='60'> </e-column> 
+            <e-column field='coordinates.x' headerText='X' textAlign='left' width='60'> </e-column> 
+            <e-column field='coordinates.y' headerText='Y' textAlign='left' width='60'> </e-column> 
+
+            <e-column field='update_question' headerText='' textAlign='left' width='50'>
+              <ng-template #template let-cities>
+                  
+                <button class="button" target="_blank" rel="noopener"  (click)='goToNearest(cities)'>
+                   
+            
+                  <span>Nearest</span>
+            
+                    
+                </button>
+
+              </ng-template>   
+ 
+
+            </e-column>
+
+
+            
+
+        </e-columns>
+    
+        </ejs-grid>
+    </p>
+    </fieldset>
+
+  
+
+  </div>
+  <!--
+<div *ngIf="showNearest==true">
+    <app-nearest [ciy]="city" [cityForm]="cityForm"></app-nearest>
+</div>
+
+<router-outlet></router-outlet>-->
+    
+ 

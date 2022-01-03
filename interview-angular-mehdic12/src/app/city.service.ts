@@ -44,7 +44,7 @@ export class CityService {
          y = element.coordinates.y;
       }
 
-       if(x1 != x   &&   y1 != y ) {
+       if(x1 != x   &&   y1 != y && rx!=x  && ry!=y) {
            let dx = Math.pow(x1-x, 2);
            let dy = Math.pow(y1-y, 2);
            let d = Math.sqrt(dx+dy);
